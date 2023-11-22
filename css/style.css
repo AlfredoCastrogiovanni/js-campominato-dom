@@ -60,6 +60,12 @@ header .wrapper {
     justify-content: end;
 }
 
+.buttons .score {
+    margin-right: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
 .buttons select {
     padding: 0.5rem 1rem;
     border: 1px solid black;

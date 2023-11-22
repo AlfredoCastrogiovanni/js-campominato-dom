@@ -4,6 +4,8 @@ const playButton = document.getElementById("playButton");
 
 playButton.addEventListener("click", function() {
     const squareNumber = parseInt(document.getElementById("difficulty").value);
+    const scoreDisplay = document.querySelector(".score");
+    scoreDisplay.textContent = "Score: 0";
     wrapper.innerHTML = "";
     createSquare(wrapper,squareNumber);
 });
@@ -14,6 +16,7 @@ playButton.addEventListener("click", function() {
 function createSquare(wrapper,times) {
     const bombList = generateBomb(times);
     let gameOver = false;
+    let score = 0;
 
     for(let i=1; i <= times; i++) {
         const newSquare = document.createElement("div");
@@ -45,6 +48,10 @@ function createSquare(wrapper,times) {
                     wrapper.append(gameOverElement);
                 } else {
                     this.classList.add("bg-blue");
+                    score++
+                    console.log("Score : ", score);
+                    const scoreDisplay = document.querySelector(".score");
+                    scoreDisplay.textContent = `Score: ${score}`;
                 }
             }
         });
