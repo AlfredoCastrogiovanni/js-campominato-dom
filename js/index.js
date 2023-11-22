@@ -12,9 +12,13 @@ playButton.addEventListener("click", function() {
 
 // return a new square
 function createSquare(wrapper,times) {
+    const bombList = generateBomb(times);
+    let gameOver = false;
+
     for(let i=1; i <= times; i++) {
         const newSquare = document.createElement("div");
         newSquare.classList.add("square");
+
 
         newSquare.style.width = `calc(100% / ${Math.sqrt(times)})`;
         newSquare.style.height = `calc(100% / ${Math.sqrt(times)})`;
@@ -23,17 +27,25 @@ function createSquare(wrapper,times) {
         squareContent.textContent = i;
         newSquare.append(squareContent);
 
-        const bombList = generateBomb(times);
+        if(bombList.includes(i)) {
+            newSquare.classList.add("bomb");
+        }
 
         newSquare.addEventListener("click", function() {
-            // this.classList.add("bg-blue");
-            // console.log(this.textContent);
-
-            if(bombList.includes(parseInt(this.textContent))) {
-                this.classList.add("bg-red");
-                gameOver = false;
-            } else {
-                this.classList.add("bg-blue");
+            if(!gameOver) {
+                if(bombList.includes(parseInt(this.textContent))) {
+                    squareBombList = document.querySelectorAll(".bomb");
+                    for(let i=0; i < squareBombList.length; i++) {
+                        squareBombList[i].classList.add("bg-red");
+                    }
+                    gameOver = true;
+                    const gameOverElement = document.createElement("div");
+                    gameOverElement.classList.add("alert");
+                    gameOverElement.textContent = "GameOver";
+                    wrapper.append(gameOverElement);
+                } else {
+                    this.classList.add("bg-blue");
+                }
             }
         });
         
