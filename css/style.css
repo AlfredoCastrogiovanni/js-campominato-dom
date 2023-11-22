@@ -24,6 +24,10 @@ body {
     background-color: rgb(53, 53, 243);
 }
 
+.bg-red {
+    background-color: red;
+}
+
 /* Header */
 header {
     width: 100%;
